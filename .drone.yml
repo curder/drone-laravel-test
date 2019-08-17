@@ -2,7 +2,7 @@ pipeline:
   backend:
     image: motecshine/laravelphp71
     commands:
-      - composer install 
+      - composer install -vvv
       - cp .env.example .env
       - php artisan key:generate
       - ./vendor/bin/phpunit
