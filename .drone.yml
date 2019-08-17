@@ -1,0 +1,18 @@
+pipeline:
+  backend:
+    image: motecshine/laravelphp71
+    commands:
+      - composer install 
+      - cp .env.example .env
+      - php artisan key:generate
+      - ./vendor/bin/phpunit
+      - rm -rf vendor
+      # - git tag ${DRONE_COMMIT_SHA} #这里打上tag
+      # - git push origin ${DRONE_COMMIT_SHA} # 提交这个tag
+  frontend:
+      image: node:8
+      commands:
+        - npm install
+        - npm audit fix
+        - npm run prod
+        - rm -rf node_module
