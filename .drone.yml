@@ -2,6 +2,7 @@ pipeline:
   backend:
     image: motecshine/laravelphp71
     commands:
+      - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
       - composer install -vvv
       - cp .env.example .env
       - php artisan key:generate
