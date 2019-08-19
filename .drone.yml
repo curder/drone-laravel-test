@@ -1,12 +1,11 @@
 pipeline:
   ssh:
-    pull: true
     image: appleboy/drone-ssh
     settings:
       host: drone-deploy.webfsd.com
       username: deployer
       key:
-        from_secret: ssh_key
+        from_secret: ${SSH_KEY}
       port: 32
       script:
         - echo "hello"
