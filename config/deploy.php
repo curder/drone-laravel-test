@@ -65,7 +65,7 @@ return [
 
         // Deployment is done and live
         'done' => [
-            //
+            'done' => ['fpm:reload'],
         ],
 
         // Deployment succeeded.
@@ -94,6 +94,7 @@ return [
         'application' => env('APP_NAME', 'Laravel'),
         'repository' => 'https://github.com/curder/drone-laravel-test.git',
         'default_timeout' => null,
+        'php_fpm_service' => 'php72-php-fpm'
     ],
 
     /*
