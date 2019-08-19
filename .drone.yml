@@ -62,6 +62,9 @@ steps:
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
+depends_on:
+  - build
+
 ---
 kind: pipeline
 name: deploy
@@ -89,7 +92,7 @@ trigger:
     - success
 
 depends_on:
-- build
+  - stage
 
 # services:
 #   redis:
