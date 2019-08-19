@@ -4,8 +4,9 @@ pipeline:
     settings:
       host: drone-deploy.webfsd.com
       username: deployer
-      password: 1234
+      key:
+        from_secret: ssh_key
       port: 32
       script:
-        - echo hello
-        - echo world
+        - echo "hello"
+        - echo "world"
