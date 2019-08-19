@@ -2,7 +2,8 @@ clone:
   git:
     image: plugins/git
     depth: 50
-    tags: true
+    tags: true,
+    path: /tmp
 
 kind: pipeline
 name: default
@@ -60,7 +61,8 @@ steps:
       port:
         from_secret: ssh_port
     script:
-      - date
+      - cd /tmp/drone/laravel-test
+      - ls -al
       - echo "hello world"
 # services:
 #   redis:
