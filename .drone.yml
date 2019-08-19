@@ -4,10 +4,14 @@ steps:
 - name: ssh
   image: appleboy/drone-ssh
   settings:
-    host: $SSH_HOST
-    username: $SSH_USERNAME
-    key: $SSH_KEY
-    port: 32
+    host: 
+      from_secret: ssh_host
+    username: 
+      from_secret: ssh_username
+    key: 
+      from_secret: ssh_key
+    port: 
+      from_secret: ssh_port
     environment:
       SSH_HOST:
         from_secret: ssh_host
