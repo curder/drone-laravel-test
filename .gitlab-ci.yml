@@ -1,0 +1,90 @@
+image: lorisleiva/laravel-docker:latest
+
+.init_ssh: &init_ssh |
+  eval $(ssh-agent -s)
+  echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  ssh-keyscan dev.example.com >> ~/.ssh/known_hosts
+  chmod 644 ~/.ssh/known_hosts
+
+.change_file_permissions: &change_file_permissions |
+  find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
+  find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+
+stages:
+  - build
+  - test
+  - deploy
+
+composer:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+    - php artisan key:generate
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - vendor/
+      - .env
+
+npm:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-npm
+    paths:
+      - node_modules/
+  script:
+    - npm install
+    - npm run production
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - node_modules/
+      - public/css/
+      - public/js/
+
+codestyle:
+  stage: test
+  dependencies: []
+  script:
+    - phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+
+phpunit:
+  stage: test
+  dependencies:
+    - composer
+  script:
+    - phpunit --coverage-text --colors=never
+
+staging:
+  stage: deploy
+  script:
+    - *init_ssh
+    - *change_file_permissions
+    - php artisan deploy --hosts=dev.example.com -s upload -vvv
+  environment:
+    name: staging
+    url: http://dev.example.com
+  only:
+    - master
+
+production:
+  stage: deploy
+  script:
+    - *init_ssh
+    - *change_file_permissions
+    - php artisan deploy --hosts=www.example.com -s upload -vvv
+  environment:
+    name: production
+    url: http://www.example.com
+  when: manual
+  only:
+    - master
+
