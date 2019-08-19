@@ -1,7 +1,7 @@
 kind: pipeline
 name: default
 steps:
-- name: ssh
+  ssh:
     image: appleboy/drone-ssh
     settings:
       host: $SSH_HOST
