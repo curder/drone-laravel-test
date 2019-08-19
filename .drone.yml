@@ -17,7 +17,7 @@ pipeline:
         - yarn run production
 
   backend:
-    image: laradock/workspace
+    image: lorisleiva/laravel-docker:latest
     group: laravel
     commands:
       - php -v
