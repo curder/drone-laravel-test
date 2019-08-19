@@ -31,10 +31,10 @@ pipeline:
 
  deploy:
     image: appleboy/drone-ssh
-    host: ${SSH_HOST}
-    port: ${SSH_PORT}
-    username: ${SSH_USER}
-    ssh_key: ${SSH_SECRET_KEY}
+    host: $SSH_HOST
+    port: $SSH_PORT
+    username: $SSH_USER
+    ssh_key: $SSH_SECRET_KEY
     command_timeout: 360
     commands:
       - date
