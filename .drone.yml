@@ -36,7 +36,8 @@ steps:
     image: lorisleiva/laravel-docker:latest
     group: laravel
     environment:
-       SSH_KEY: ssh_key
+       SSH_KEY:
+         from_secret: ssh_key
     commands:
       - eval $(ssh-agent -s)
       - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
@@ -47,21 +48,21 @@ steps:
       - chmod 644 ~/.ssh/known_hosts
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
-  - name: ssh
-    pull: true
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: ssh_host
-      username:
-        from_secret: ssh_username
-      key:
-        from_secret: ssh_key
-      port:
-        from_secret: ssh_port
-    script:
-      - date
-      - echo "hello world"
+  # - name: ssh
+  #   pull: true
+  #   image: appleboy/drone-ssh
+  #   settings:
+  #     host:
+  #       from_secret: ssh_host
+  #     username:
+  #       from_secret: ssh_username
+  #     key:
+  #       from_secret: ssh_key
+  #     port:
+  #       from_secret: ssh_port
+  #   script:
+  #     - date
+  #     - echo "hello world"
 # services:
 #   redis:
 #     image: redis:latest
