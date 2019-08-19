@@ -2,6 +2,7 @@ kind: pipeline
 name: default
 steps:
 - name: ssh
+  pull: true
   image: appleboy/drone-ssh
   settings:
     host: 
