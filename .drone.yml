@@ -29,7 +29,8 @@ pipeline:
 #      - php artisan migrate
 #      - ./vendor/bin/phpunit
 
- deploy:
+pipeline:
+  ssh:
     image: appleboy/drone-ssh
     settings:
       host: curder.com
