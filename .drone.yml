@@ -29,6 +29,11 @@ pipeline:
       - php artisan migrate
       - ./vendor/bin/phpunit
 
- services:
-  redis:
-    image: redis:latest
+  services:
+  - name: cache
+    image: redis
+    
+  - name: database
+    image: mysql
+    entrypoint: [ mysqld ]
+    command: [ "--character-set-server=utf8mb4" ]
