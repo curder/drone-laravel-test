@@ -83,8 +83,10 @@ steps:
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 trigger:
+  target:
+    - production
   status:
-  - success
+    - success
 
 depends_on:
 - build
