@@ -31,9 +31,9 @@ pipeline:
 
 services:
   - name: cache
-    image: redis
+      image: redis:latest
     
   - name: database
-    image: mysql
-    entrypoint: [ mysqld ]
-    command: [ "--character-set-server=utf8mb4" ]
+      image: mysql:5.7
+      entrypoint: [ mysqld ]
+      command: [ "--character-set-server=utf8mb4" ]
