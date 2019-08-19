@@ -44,10 +44,10 @@ steps:
         from_secret: ssh_key
       port:
         from_secret: ssh_port
-      script:
-        - cd /var/www/codes/temp/
-        - ll
-        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+    script:
+      - cd /var/www/codes/temp/
+      - ll
+      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 # services:
 #   redis:
 #     image: redis:latest
