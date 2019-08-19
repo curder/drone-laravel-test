@@ -40,7 +40,11 @@ steps:
   #     - ssh-keyscan drone-deploy.webfsd.com >> ~/.ssh/known_hosts
   #     - chmod 644 ~/.ssh/known_hosts
   #     - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+---
+kind: pipeline
+name: build
 
+steps:
   - name: build
     pull: true
     image: appleboy/drone-ssh
