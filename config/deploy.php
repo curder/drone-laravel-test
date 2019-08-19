@@ -64,13 +64,11 @@ return [
         ],
 
         // Deployment is done and live
-        'done' => [
-            'fpm:reload',
-        ],
+        'done' => [],
 
         // Deployment succeeded.
         'success' => [
-            //
+            'fpm:reload',
         ],
 
         // Deployment failed.
