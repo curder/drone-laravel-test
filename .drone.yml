@@ -9,45 +9,45 @@ kind: pipeline
 name: default
 
 steps:
-- name: frontend
-    image: node:10.16
+  - name: frontend
+      image: node:10.16
+      group: laravel
+      commands:
+        - node -v
+        - npm -v
+        - yarn --version
+        - yarn config set cache-folder .yarn-cache
+        - yarn install
+        - yarn run production
+
+  - name: backend
+    image: lorisleiva/laravel-docker:latest
     group: laravel
     commands:
-      - node -v
-      - npm -v
-      - yarn --version
-      - yarn config set cache-folder .yarn-cache
-      - yarn install
-      - yarn run production
+      - php -v
+      - composer -V
+      - cp .env.example .env
+      - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
+      - composer install --prefer-dist
+      - php artisan key:generate
+  #      - php artisan migrate
+  #      - ./vendor/bin/phpunit
 
-- name: backend
-  image: lorisleiva/laravel-docker:latest
-  group: laravel
-  commands:
-    - php -v
-    - composer -V
-    - cp .env.example .env
-    - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
-    - composer install --prefer-dist
-    - php artisan key:generate
-#      - php artisan migrate
-#      - ./vendor/bin/phpunit
-
-- name: ssh
-  pull: true
-  image: appleboy/drone-ssh
-  settings:
-    host:
-      from_secret: ssh_host
-    username:
-      from_secret: ssh_username
-    key:
-      from_secret: ssh_key
-    port:
-      from_secret: ssh_port
-    script:
-      - echo "hello"
-      -  php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+  - name: ssh
+    pull: true
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      key:
+        from_secret: ssh_key
+      port:
+        from_secret: ssh_port
+      script:
+        - echo "hello"
+        -  php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 #        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
