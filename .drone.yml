@@ -65,10 +65,8 @@ steps:
         from_secret: ssh_port
       script:
         - echo 'hello'
-        - cd /tmp/drone
-        - ls -al
-        - pwd
-        - echo "hello world"
+        - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
+        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 # services:
 #   redis:
 #     image: redis:latest
