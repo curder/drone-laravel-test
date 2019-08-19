@@ -47,8 +47,6 @@ steps:
       script:
         - woami
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
-#        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
-
 # services:
 #   redis:
 #     image: redis:latest
