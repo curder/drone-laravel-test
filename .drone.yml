@@ -64,7 +64,7 @@ steps:
       port:
         from_secret: ssh_port
       script:
-        - echo 'hello'
+        - echo ${whoami}
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 # services:
