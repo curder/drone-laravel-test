@@ -32,7 +32,7 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
-  - name: backend
+  - name: stage
     image: lorisleiva/laravel-docker:latest
     group: laravel
     commands:
