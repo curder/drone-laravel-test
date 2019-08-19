@@ -1,8 +1,11 @@
+workspace:
+  base: /tmp/drone
+
 clone:
   git:
     image: plugins/git
     depth: 50
-    tags: true,
+    tags: true
     path: /tmp
 
 kind: pipeline
@@ -62,7 +65,7 @@ steps:
         from_secret: ssh_port
       script:
         - echo 'hello'
-        - cd /tmp/drone/laravel-test
+        - cd /tmp/drone
         - ls -al
         - pwd
         - echo "hello world"
