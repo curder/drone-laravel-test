@@ -67,6 +67,10 @@ steps:
         - echo ${whoami}
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+
+trigger:
+  status:
+    - success
 # services:
 #   redis:
 #     image: redis:latest
