@@ -54,7 +54,6 @@ steps:
       port:
         from_secret: ssh_port
       script:
-        - echo ${whoami}
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
@@ -63,7 +62,19 @@ kind: pipeline
 
 steps:
 - name: deployment
-  image: ...
+  image: appleboy/drone-ssh
+  settings:
+    host:
+      from_secret: ssh_host
+    username:
+      from_secret: ssh_username
+    key:
+      from_secret: ssh_key
+    port:
+      from_secret: ssh_port
+    script:
+      - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
+      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 trigger:
   status:
