@@ -31,12 +31,13 @@ pipeline:
 
  deploy:
     image: appleboy/drone-ssh
-    host: $SSH_HOST
-    port: $SSH_PORT
-    username: $SSH_USER
-    ssh_key: $SSH_SECRET_KEY
+    host: curder.com
+    username: deployer
+    key:
+      from_secret: ssh_key
+    port: 32
     command_timeout: 360
-    commands:
+    script:
       - date
       - php -v
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
