@@ -41,6 +41,7 @@ pipeline:
       - php -v
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
+
 # services:
 #   redis:
 #     image: redis:latest
