@@ -29,6 +29,10 @@ pipeline:
 #      - php artisan migrate
 #      - ./vendor/bin/phpunit
 
+  stage:
+    commands:
+      - php artisan deploy --hosts=dev.example.com -s upload -vvv
+
 # services:
 #   redis:
 #     image: redis:latest
