@@ -32,22 +32,11 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
-  - name: ssh
-    pull: true
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: ssh_host
-      username:
-        from_secret: ssh_username
-      key:
-        from_secret: ssh_key
-      port:
-        from_secret: ssh_port
-    script:
-      - date
-      - echo "hello world"
-      # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+  - name: backend
+    image: lorisleiva/laravel-docker:latest
+    group: laravel
+    commands:
+      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 # services:
 #   redis:
 #     image: redis:latest
