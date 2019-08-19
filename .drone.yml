@@ -4,21 +4,20 @@ clone:
     depth: 50
     tags: true
 
-
 kind: pipeline
 name: default
 
 steps:
   - name: frontend
-      image: node:10.16
-      group: laravel
-      commands:
-        - node -v
-        - npm -v
-        - yarn --version
-        - yarn config set cache-folder .yarn-cache
-        - yarn install
-        - yarn run production
+    image: node:10.16
+    group: laravel
+    commands:
+      - node -v
+      - npm -v
+      - yarn --version
+      - yarn config set cache-folder .yarn-cache
+      - yarn install
+      - yarn run production
 
   - name: backend
     image: lorisleiva/laravel-docker:latest
@@ -47,10 +46,8 @@ steps:
         from_secret: ssh_port
       script:
         - echo "hello"
-        -  php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
-
+        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 #        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
-
 
 # services:
 #   redis:
