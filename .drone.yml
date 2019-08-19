@@ -14,5 +14,5 @@ steps:
       from_secret: ssh_port
     script:
       - echo "hello"
-      - echo "deploy"
+      - echo whoami
 
