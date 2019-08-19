@@ -1,5 +1,6 @@
 pipeline:
   ssh:
+    pull: true
     image: appleboy/drone-ssh
     settings:
       host: drone-deploy.webfsd.com
