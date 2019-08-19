@@ -33,12 +33,13 @@ steps:
 #   - ./vendor/bin/phpunit
 
 - stage:
-    commands:
-      - php artisan deploy --hosts=dev.example.com -s upload -vvv
-    when:
-      branch:
-        - master
-        - feature/*
+  image: lorisleiva/laravel-docker:latest
+  group: laravel
+  commands:
+    - php artisan deploy --hosts=dev.example.com -s upload -vvv
+  when:
+    branch:
+      - master
 
 # services:
 #   redis:
