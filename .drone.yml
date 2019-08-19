@@ -29,7 +29,7 @@ pipeline:
       - php artisan migrate
       - ./vendor/bin/phpunit
 
-  services:
+services:
   - name: cache
     image: redis
     
