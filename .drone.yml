@@ -1,3 +1,12 @@
+kind: pipeline
+name: default
+clone:
+  disable: true
+  
+steps:
+- name: clone
+  image: janecitizen/cloner
+  
 pipeline:
   backend:
     image: motecshine/laravelphp71
