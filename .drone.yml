@@ -45,7 +45,7 @@ kind: pipeline
 name: stage
 
 steps:
-  - name: ssh
+  - name: deploy_to_stage
     pull: true
     image: appleboy/drone-ssh
     settings:
@@ -66,10 +66,10 @@ depends_on:
 
 ---
 kind: pipeline
-name: deploy
+name: production
 
 steps:
-  - name: deployment
+  - name: deploy_to_production
     image: appleboy/drone-ssh
     settings:
       host:
