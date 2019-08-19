@@ -32,14 +32,6 @@ steps:
 #   - php artisan migrate
 #   - ./vendor/bin/phpunit
 
-- stage:
-  image: lorisleiva/laravel-docker:latest
-  group: laravel
-  commands:
-    - php artisan deploy --hosts=dev.example.com -s upload -vvv
-  when:
-    branch:
-      - master
 
 # services:
 #   redis:
