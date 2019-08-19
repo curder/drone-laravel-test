@@ -34,7 +34,7 @@ pipeline:
     image: appleboy/drone-ssh
     settings:
       host: 
-        from_secret: ssh_host
+        - from_secret: ssh_host
       username: 
         from_secret: ssh_username
       key:
