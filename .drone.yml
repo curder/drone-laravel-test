@@ -30,10 +30,12 @@ pipeline:
       - ./vendor/bin/phpunit
 
 services:
-  - name: cache
-    image: redis:latest
-    
-  - name: database
-    image: mysql:5.7
-    entrypoint: [ mysqld ]
-    command: [ "--character-set-server=utf8mb4" ]
+- name: database
+  image: mysql:5.7
+  ports:
+  - 3306
+  entrypoint: [ mysqld ]
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+  command: [ "--character-set-server=utf8mb4" ]
+    MYSQL_DATABASE: test
