@@ -5,18 +5,6 @@ clone:
     tags: true
 
 pipeline:
-  # 使用 cache 插件恢复缓存的 vendor 目录
-  restore-cache:
-    image: drillster/drone-volume-cache
-    # 恢复缓存参数
-    restore: true
-    mount:
-      - ./vendor
-      - ./node_modules
-    volumes: 
-      # 这里使用了 volumes 属性，需要开启仓库受信任选项
-      - /var/local/drone-cache:/cache
-
   frontend:
       image: node:10.16
       group: laravel
