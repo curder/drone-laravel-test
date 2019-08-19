@@ -45,7 +45,7 @@ steps:
       port:
         from_secret: ssh_port
       script:
-        - echo "hello"
+        - woami
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 #        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
