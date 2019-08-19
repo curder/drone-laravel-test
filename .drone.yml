@@ -44,7 +44,7 @@ steps:
       - mkdir -p ~/.ssh
       - chmod 700 ~/.ssh
       - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-      - ssh-keyscan dev.example.com >> ~/.ssh/known_hosts
+      - ssh-keyscan drone-deploy.webfsd.com >> ~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
