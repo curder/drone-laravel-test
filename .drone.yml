@@ -45,7 +45,7 @@ steps:
       port:
         from_secret: ssh_port
       script:
-        - woami
+        - cd /var/www/codes/temp/
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 # services:
 #   redis:
