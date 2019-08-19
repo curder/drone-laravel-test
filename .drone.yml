@@ -4,8 +4,8 @@ clone:
   disable: true
   
 steps:
-- name: clone
-  image: janecitizen/cloner
+  - name: clone
+    image: janecitizen/cloner
   
 pipeline:
   backend:
