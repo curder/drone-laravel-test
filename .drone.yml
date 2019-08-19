@@ -41,6 +41,6 @@ services:
     - 3306
     entrypoint: [ mysqld ]
     environment:
-      MYSQL_DATABASE: homestead
+      MYSQL_DATABASE: laravel
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     command: [ "--character-set-server=utf8mb4" ]
