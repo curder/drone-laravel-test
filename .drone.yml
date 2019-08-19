@@ -25,7 +25,6 @@ steps:
       - php artisan key:generate
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
-
   # - name: stage
   #   image: lorisleiva/laravel-docker:latest
   #   group: laravel
@@ -70,30 +69,27 @@ kind: pipeline
 name: deploy
 
 steps:
-- name: deployment
-  image: appleboy/drone-ssh
-  settings:
-    host:
-      from_secret: ssh_host
-    username:
-      from_secret: ssh_username
-    key:
-      from_secret: ssh_key
-    port:
-      from_secret: ssh_port
-    script:
-      - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
-      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+  - name: deployment
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      key:
+        from_secret: ssh_key
+      port:
+        from_secret: ssh_port
+      script:
+        - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
+        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 trigger:
-  target:
-    - production
   status:
     - success
 
 depends_on:
   - stage
-
 # services:
 #   redis:
 #     image: redis:latest
