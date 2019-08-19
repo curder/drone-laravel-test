@@ -1,28 +1,32 @@
-kind: pipeline
-name: default
 clone:
-  disable: true
-  
-steps:
-  - name: clone
-    image: janecitizen/cloner
-  
+  git:
+    image: plugins/git
+    depth: 50
+    tags: true
+
 pipeline:
-  backend:
-    image: motecshine/laravelphp71
-    commands:
-      - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
-      - composer install -vvv
-      - cp .env.example .env
-      - php artisan key:generate
-      - ./vendor/bin/phpunit
-      - rm -rf vendor
-      # - git tag ${DRONE_COMMIT_SHA} #这里打上tag
-      # - git push origin ${DRONE_COMMIT_SHA} # 提交这个tag
   frontend:
-      image: node:8
+      image: node:10.16
+      group: laravel
       commands:
-        - npm install
-        - npm audit fix
-        - npm run prod
-        - rm -rf node_module
+        - node -v
+        - npm -v
+        - yarn --version
+        - yarn config set cache-folder .yarn-cache
+        - yarn install
+        - yarn run production
+  backend:
+    image: laradock/workspace
+    group: laravel
+    commands:
+      - php -v
+      - composer -V
+      - cp .env.example .env
+      - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
+      - composer install --prefer-dist
+      - php artisan key:generate
+      - php artisan migrate
+      - ./vendor/bin/phpunit
+ services:
+  redis:
+    image: redis:latest
