@@ -29,6 +29,13 @@ pipeline:
 #      - php artisan migrate
 #      - ./vendor/bin/phpunit
 
+  stage:
+    image: lorisleiva/laravel-docker:latest
+    group: laravel
+    commands:
+      - php -v
+      - php artisan deploy --hosts=dev.example.com -s upload -vvv
+
 # services:
 #   redis:
 #     image: redis:latest
