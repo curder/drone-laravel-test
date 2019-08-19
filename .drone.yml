@@ -60,12 +60,12 @@ steps:
         from_secret: ssh_key
       port:
         from_secret: ssh_port
-    script:
-      - echo 'hello'
-      - cd /tmp/drone/laravel-test
-      - ls -al
-      - pwd
-      - echo "hello world"
+      script:
+        - echo 'hello'
+        - cd /tmp/drone/laravel-test
+        - ls -al
+        - pwd
+        - echo "hello world"
 # services:
 #   redis:
 #     image: redis:latest
