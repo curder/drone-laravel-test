@@ -1,13 +1,3 @@
-workspace:
-  base: /tmp/drone
-
-clone:
-  git:
-    image: plugins/git
-    depth: 50
-    tags: true
-    path: /tmp
-
 kind: pipeline
 name: default
 
@@ -51,7 +41,7 @@ steps:
   #     - chmod 644 ~/.ssh/known_hosts
   #     - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
-  - name: ssh
+  - name: build
     pull: true
     image: appleboy/drone-ssh
     settings:
@@ -68,9 +58,20 @@ steps:
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
         - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
+---
+kind: pipeline
+
+steps:
+- name: deployment
+  image: ...
+
 trigger:
   status:
-    - success
+  - success
+
+depends_on:
+- build
+
 # services:
 #   redis:
 #     image: redis:latest
