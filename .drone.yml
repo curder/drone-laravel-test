@@ -30,6 +30,11 @@ pipeline:
       - ./vendor/bin/phpunit
 
 services:
+- name: redis
+  image: redis
+  ports:
+  - 6379
+
 - name: database
   image: mysql:5.7
   ports:
