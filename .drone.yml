@@ -33,7 +33,7 @@ pipeline:
   ssh:
     image: appleboy/drone-ssh
     settings:
-      host: curder.com
+      host: 47.74.239.52
       username: deployer
       key:
         from_secret: ssh_key
