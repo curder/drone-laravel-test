@@ -31,16 +31,17 @@ pipeline:
 
  deploy:
     image: appleboy/drone-ssh
-    host: curder.com
-    username: deployer
-    key:
-      from_secret: ssh_key
-    port: 32
-    command_timeout: 360
-    script:
-      - date
-      - php -v
-      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+    settings:
+      host: curder.com
+      username: deployer
+      key:
+        from_secret: ssh_key
+      port: 32
+      command_timeout: 360
+      script:
+        - date
+        - php -v
+        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 
 # services:
