@@ -26,21 +26,21 @@ pipeline:
       - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
       - composer install --prefer-dist
       - php artisan key:generate
-      - php artisan migrate
-      - ./vendor/bin/phpunit
+#      - php artisan migrate
+#      - ./vendor/bin/phpunit
 
-services:
-  redis:
-    image: redis:latest
-    ports:
-    - 6379
+# services:
+#   redis:
+#     image: redis:latest
+#     ports:
+#     - 6379
 
-  database:
-    image: mysql:5.7
-    ports:
-    - 3306
-    entrypoint: [ mysqld ]
-    environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    command: [ "--character-set-server=utf8mb4" ]
+#   database:
+#     image: mysql:5.7
+#     ports:
+#     - 3306
+#     entrypoint: [ mysqld ]
+#     environment:
+#       MYSQL_DATABASE: laravel
+#       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+#     command: [ "--character-set-server=utf8mb4" ]
