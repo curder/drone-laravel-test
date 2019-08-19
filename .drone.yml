@@ -2,8 +2,7 @@ pipeline:
   ssh:
     image: appleboy/drone-ssh
     settings:
-      host:
-        - drone-deploy.webfsd.com
+      host: drone-deploy.webfsd.com
       username: deployer
       password: 1234
       port: 32
