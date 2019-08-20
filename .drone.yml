@@ -36,7 +36,7 @@ steps:
       - adduser -D deployer
       - su - deployer
       - mkdir -p ~/.ssh
-      - echo "$SSH_KEY" > /home/deployer/.ssh/deployerkey
+      - echo $SSH_KEY > /home/deployer/.ssh/deployerkey
       - chmod 700 ~/.ssh/deployerkey
       # - eval $(ssh-agent -s)
       # - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
