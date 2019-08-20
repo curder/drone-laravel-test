@@ -73,9 +73,9 @@ steps:
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy-prod.webfsd.com -s upload -vvv
-  trigger:
-    branch:
-      - release
+      # trigger:
+      #   branch:
+      #     - release
 # ---
 # kind: pipeline
 # name: production
