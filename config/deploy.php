@@ -95,8 +95,6 @@ return [
         'php_fpm_service' => 'php72-php-fpm',
 
         'keep_releases' => 3,
-        'user' => 'deployer',
-
     ],
 
     /*
@@ -115,6 +113,7 @@ return [
             'deploy_path' => '/var/www/codes/temp/drone-deploy.webfsd.com',
             'identityFile' => '~/.ssh/deployerkey',
             'port' => 22,
+            'user' => 'deployer',
             'forwardAgent' => true,
             'multiplexing' => true,
             'sshOptions'   => [
@@ -127,6 +126,7 @@ return [
             'deploy_path' => '/var/www/codes/temp/drone-deploy-prod.webfsd.com',
             'identityFile' => '~/.ssh/deployerkey',
             'port' => 22,
+            'user' => 'deployer',
             'forwardAgent' => true,
             'multiplexing' => true,
             'sshOptions'   => [
