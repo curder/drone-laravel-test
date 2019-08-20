@@ -92,7 +92,18 @@ return [
         'application' => env('APP_NAME', 'Laravel'),
         'repository' => 'https://github.com/curder/drone-laravel-test.git',
         'default_timeout' => null,
-        'php_fpm_service' => 'php72-php-fpm'
+        'php_fpm_service' => 'php72-php-fpm',
+
+        'keep_releases' => 3,
+        'user' => 'deployer',
+        'identityFile' => '~/.ssh/deployerkey',
+        'port' => 22,
+        'forwardAgent' => true,
+        'multiplexing' => true,
+        'sshOptions'   => [
+            'UserKnownHostsFile' => '/dev/null',
+            'StrictHostKeyChecking' => 'no'
+        ],
     ],
 
     /*
@@ -109,15 +120,10 @@ return [
     'hosts' => [
         'drone-deploy.webfsd.com' => [
             'deploy_path' => '/var/www/codes/temp/drone-deploy.webfsd.com',
-            'user' => 'deployer',
-            'identityFile' => '~/.ssh/deployerkey',
-            'port' => 22,
-            'forwardAgent' => true,
-            'multiplexing' => true,
-            'sshOptions'   => [
-                'UserKnownHostsFile' => '/dev/null',
-                'StrictHostKeyChecking' => 'no'
-            ],
+        ],
+
+        'drone-deploy-pord.webfsd.com' => [
+            'deploy_path' => '/var/www/codes/temp/drone-deploy-prod.webfsd.com',
         ],
     ],
 

@@ -39,7 +39,6 @@ steps:
       - phpunit --coverage-text --colors=never
 
   - name: stage
-    pull: true
     image: lorisleiva/laravel-docker:latest
     group: laravel
     environment:
@@ -56,6 +55,31 @@ steps:
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+
+  - name: prod
+    image: lorisleiva/laravel-docker:latest
+    group: laravel
+    environment:
+      SSH_KEY:
+        from_secret: ssh_key
+    commands:
+      - eval $(ssh-agent -s)
+      - export ssh_path=~/.ssh
+      - mkdir -p $ssh_path
+      # - echo $SSH_KEY
+      - echo $SSH_KEY | tr -d '\r' | sed "s/-----BEGIN RSA PRIVATE KEY----- //g" | sed "s/ -----END RSA PRIVATE KEY-----//g" | sed "s/ /\n/g" > $ssh_path/deployerkey
+      - sed -i '1i -----BEGIN RSA PRIVATE KEY-----' $ssh_path/deployerkey # 在第一行前添加字符串
+      - echo '-----END RSA PRIVATE KEY-----' >> $ssh_path/deployerkey # 在最后一行行前添加字符串
+      - chmod 700 $ssh_path/deployerkey
+      - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
+      - php artisan deploy --hosts=drone-deploy-pord.webfsd.com -s upload -vvv
+    trigger:
+      status:
+        - success
+      branch:
+        - release
+      target:
+        - production
 # ---
 # kind: pipeline
 # name: production
