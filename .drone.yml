@@ -21,7 +21,7 @@ steps:
       - composer -V
       - cp .env.example .env
       - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
-      - composer install --prefer-dist
+      - composer install --prefer-dist -vvv
       - php artisan key:generate
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
