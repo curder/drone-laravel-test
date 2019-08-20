@@ -112,6 +112,12 @@ return [
             'user' => 'deployer',
             'identityFile' => '~/.ssh/deployerkey',
             'port' => 22,
+            'forwardAgent' => true,
+            'multiplexing' => true,
+            'sshOptions'   => [
+                'UserKnownHostsFile' => '/dev/null',
+                'StrictHostKeyChecking' => 'no'
+            ],
         ],
     ],
 
