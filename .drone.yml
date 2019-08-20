@@ -32,6 +32,7 @@ name: stage
 
 steps:
   - name: stage
+    pull: true
     image: lorisleiva/laravel-docker:latest
     group: laravel
     environment:
