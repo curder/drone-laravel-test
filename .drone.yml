@@ -35,7 +35,7 @@ steps:
       - eval $(ssh-agent -s)
       - export ssh_path=~/.ssh
       - mkdir -p $ssh_path
-      - echo $SSH_KEY | sed 's/ /\n/g ' > $ssh_path/deployerkey
+      - echo $SSH_KEY > $ssh_path/deployerkey
       - cat $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
       - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
