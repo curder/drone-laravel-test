@@ -33,12 +33,8 @@ steps:
         from_secret: ssh_key
     commands:
       - eval $(ssh-agent -s)
-      - adduser -D deployer
-      - su - deployer
-      - export ssh_path="~/.ssh"
+      - export ssh_path=~/.ssh
       - mkdir -p $ssh_path
-      - echo test > $ssh_path/deployerkey
-      - cat $ssh_path/deployerkey
       - echo $SSH_KEY > $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
       # - eval $(ssh-agent -s)
