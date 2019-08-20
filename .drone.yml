@@ -38,6 +38,7 @@ steps:
       - echo $SSH_KEY > $ssh_path/deployerkey
       - cat $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
+      - ping drone-deploy.webfsd.com
       # - eval $(ssh-agent -s)
       # - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
       # - mkdir -p ~/.ssh
