@@ -35,7 +35,7 @@ steps:
       - eval $(ssh-agent -s)
       - adduser -D deployer
       - su - deployer
-      - mkdir ~/.ssh
+      - mkdir -p ~/.ssh
       - echo "$SSH_KEY" > /home/deployer/.ssh/deployerkey
       - chmod 700 ~/.ssh/deployerkey
       # - eval $(ssh-agent -s)
