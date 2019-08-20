@@ -72,7 +72,7 @@ steps:
       - echo '-----END RSA PRIVATE KEY-----' >> $ssh_path/deployerkey # 在最后一行行前添加字符串
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
-      - php artisan deploy --hosts=drone-deploy-pord.webfsd.com -s upload -vvv
+      - php artisan deploy --hosts=drone-deploy-prod.webfsd.com -s upload -vvv
     trigger:
       branch:
         - release
