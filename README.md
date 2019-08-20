@@ -1,4 +1,4 @@
 ## Drone laravel Demo.
 
-[![Build Status](http://192.168.10.10:8000/api/badges/curder/drone-laravel-test/status.svg)](http://192.168.10.10:8000/curder/drone-laravel-test)
+[![Build Status](https://cloud.drone.io/api/badges/curder/drone-laravel-test/status.svg)](https://cloud.drone.io/curder/drone-laravel-test)
 
