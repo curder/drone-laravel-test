@@ -35,11 +35,12 @@ steps:
       - eval $(ssh-agent -s)
       - adduser -D deployer
       - su - deployer
-      - mkdir -p /home/deployer/.ssh
-      - echo test > /home/deployer/.ssh/deployerkey
-      - cat /home/deployer/.ssh/deployerkey
-      #- echo $SSH_KEY > /home/deployer/.ssh/deployerkey
-      - chmod 700 ~/.ssh/deployerkey
+      - export ssh_path=/home/deployer/.ssh
+      - mkdir -p $ssh_path
+      - echo test > $ssh_path/deployerkey
+      - cat $ssh_path/deployerkey
+      - echo $SSH_KEY > $ssh_path/deployerkey
+      - chmod 700 $ssh_path/deployerkey
       # - eval $(ssh-agent -s)
       # - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
       # - mkdir -p ~/.ssh
