@@ -42,7 +42,7 @@ steps:
       - hostname
       - whoami
       - cmd="echo 'hello' > /tmp/test"
-      - ssh -t -t deployer@drone-deploy.webfsd.com $cmd
+      - ssh -t -t deployer@drone-deploy.webfsd.com -i $ssh_path/deployerkey $cmd
       # - php artisan deploy:run ssh -vvv
       # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
