@@ -2,7 +2,7 @@ kind: pipeline
 name: build
 
 steps:
-  - name: frontend
+  - name: npm
     image: node:10.16
     group: laravel
     commands:
@@ -13,7 +13,7 @@ steps:
       - yarn install
       - yarn run production
 
-  - name: backend
+  - name: composer
     image: lorisleiva/laravel-docker:latest
     group: laravel
     commands:
