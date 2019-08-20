@@ -38,7 +38,7 @@ steps:
       - echo $SSH_KEY | tr -d '\r' > $ssh_path/deployerkey
       - cat $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
-      - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+      - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > $ssh_path/config
       - hostname
       - whoami
       - cmd="echo 'hello' > /tmp/test"
