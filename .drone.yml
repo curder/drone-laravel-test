@@ -35,14 +35,15 @@ steps:
       - eval $(ssh-agent -s)
       - export ssh_path=~/.ssh
       - mkdir -p $ssh_path
-      - echo $SSH_KEY | tr -d '\r' > $ssh_path/deployerkey
+      - echo $SSH_KEY | tr -d '\r' | > $ssh_path/deployerkey
       - cat $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > $ssh_path/config
       - hostname
       - whoami
       - cmd="echo 'hello' > /tmp/test"
-      - ssh -t -t deployer@drone-deploy.webfsd.com -i $ssh_path/deployerkey $cmd
+      - cat /root/.ssh/deployerkey
+      - ssh -tt deployer@drone-deploy.webfsd.com -i $ssh_path/deployerkey $cmd
       # - php artisan deploy:run ssh -vvv
       # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
