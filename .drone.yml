@@ -34,10 +34,9 @@ steps:
     commands:
       - eval $(ssh-agent -s)
       - export ssh_path=~/.ssh
-      - mkdir -p ~/.ssh
       - echo $SSH_KEY > ~/.ssh/deployerkey
       - cat ~/.ssh/deployerkey
-      - chmod 700 ~/.ssh/deployerkey
+      - mkdir -p ~/.ssh && chmod 700 ~/.ssh/deployerkey
       - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - ssh deployer@drone-deploy.webfsd.com -i ~/.ssh/deployerkey
       - ping drone-deploy.webfsd.com
@@ -47,7 +46,7 @@ steps:
       # - chmod 700 ~/.ssh
       # - ssh-keyscan drone-deploy.webfsd.com >> ~/.ssh/known_hosts
       # - chmod 644 ~/.ssh/known_host
-      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+      # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 ---
 kind: pipeline
