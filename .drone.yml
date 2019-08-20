@@ -1,5 +1,5 @@
 kind: pipeline
-name: build
+name: default
 
 steps:
   - name: npm
@@ -26,11 +26,6 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
----
-kind: pipeline
-name: stage
-
-steps:
   - name: stage
     pull: true
     image: lorisleiva/laravel-docker:latest
@@ -49,37 +44,33 @@ steps:
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+# ---
+# kind: pipeline
+# name: production
 
-depends_on:
-  - build
+# steps:
+#   - name: deploy_to_production
+#     image: appleboy/drone-ssh
+#     settings:
+#       host:
+#         from_secret: ssh_host
+#       username:
+#         from_secret: ssh_username
+#       key:
+#         from_secret: ssh_key
+#       port:
+#         from_secret: ssh_port
+#       script:
+#         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
+#         - echo "deploy to production env"
+#         # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
----
-kind: pipeline
-name: production
+# trigger:
+#   status:
+#     - success
 
-steps:
-  - name: deploy_to_production
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: ssh_host
-      username:
-        from_secret: ssh_username
-      key:
-        from_secret: ssh_key
-      port:
-        from_secret: ssh_port
-      script:
-        - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
-        - echo "deploy to production env"
-        # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
-
-trigger:
-  status:
-    - success
-
-depends_on:
-  - stage
+# depends_on:
+#   - default
 # services:
 #   redis:
 #     image: redis:latest
