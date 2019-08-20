@@ -35,10 +35,10 @@ steps:
       - eval $(ssh-agent -s)
       - export ssh_path=~/.ssh
       - mkdir -p $ssh_path
-      - echo $SSH_KEY > $ssh_path/deployerkey
+      - echo $SSH_KEY | tr -d '\r' > $ssh_path/deployerkey
       - cat $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
-      - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+      # - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 ---
