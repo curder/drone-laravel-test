@@ -32,7 +32,12 @@ steps:
       SSH_KEY:
         from_secret: ssh_key
     commands:
+      - eval $(ssh-agent -s)
+      - adduser -D deployer
+      - su - deployer
+      - mkdir ~/.ssh
       - echo "$SSH_KEY" > /home/deployer/.ssh/deployerkey
+      - chmod 700 ~/.ssh/deployerkey
       # - eval $(ssh-agent -s)
       # - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
       # - mkdir -p ~/.ssh
