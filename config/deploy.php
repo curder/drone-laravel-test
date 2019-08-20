@@ -122,7 +122,7 @@ return [
             ],
         ],
 
-        'drone-deploy-pord.webfsd.com' => [
+        'drone-deploy-prod.webfsd.com' => [
             'deploy_path' => '/var/www/codes/temp/drone-deploy-prod.webfsd.com',
             'identityFile' => '~/.ssh/deployerkey',
             'port' => 22,
