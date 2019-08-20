@@ -82,7 +82,8 @@ steps:
         from_secret: ssh_port
       script:
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
-        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+        - echo "deploy to production env"
+        # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 trigger:
   status:
