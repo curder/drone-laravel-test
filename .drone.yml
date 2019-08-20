@@ -34,12 +34,12 @@ steps:
     commands:
       - eval $(ssh-agent -s)
       - export ssh_path=~/.ssh
-      - mkdir -p $ssh_path
-      - echo $SSH_KEY > $ssh_path/deployerkey
-      - cat $ssh_path/deployerkey
-      - chmod 700 $ssh_path/deployerkey
+      - mkdir -p ~/.ssh
+      - echo $SSH_KEY > ~/.ssh/deployerkey
+      - cat ~/.ssh/deployerkey
+      - chmod 700 ~/.ssh/deployerkey
       - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-      - ssh deployer@drone-deploy.webfsd.com -i $ssh_path/deployerkey
+      - ssh deployer@drone-deploy.webfsd.com -i ~/.ssh/deployerkey
       - ping drone-deploy.webfsd.com
       # - eval $(ssh-agent -s)
       # - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
