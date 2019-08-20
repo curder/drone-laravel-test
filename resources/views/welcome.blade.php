@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title">
-                version 2
+                version 3
             </div>
             <div class="title m-b-md">
                 Laravel ❤️ CI/CD Deployer..
