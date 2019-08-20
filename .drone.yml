@@ -38,6 +38,13 @@ steps:
       - echo $SSH_KEY > $ssh_path/deployerkey
       - cat $ssh_path/deployerkey
       - chmod 700 $ssh_path/deployerkey
+      - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > $ssh_path/config
+      - export ssh_path=/home/deployer/.ssh
+      - mkdir -p $ssh_path
+      - echo $SSH_KEY > $ssh_path/deployerkey
+      - cat $ssh_path/deployerkey
+      - chmod 700 $ssh_path/deployerkey
+      - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > $ssh_path/config
       # - eval $(ssh-agent -s)
       # - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
       # - mkdir -p ~/.ssh
