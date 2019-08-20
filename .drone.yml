@@ -33,7 +33,7 @@ steps:
         from_secret: ssh_key
     commands:
       - eval $(ssh-agent -s)
-      - echo $SSH_KEY > ~/.ssh/deployerkey
+      - echo $SSH_KEY | tr -d '\r' > ~/.ssh/deployerkey
       - mkdir -p ~/.ssh
       - chmod 700 ~/.ssh
       - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
