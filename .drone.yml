@@ -26,6 +26,18 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
+  - name: codestyle
+    image: lorisleiva/laravel-docker:latest
+    group: laravel
+    commands:
+      - phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+
+  - name: phpunit
+    image: lorisleiva/laravel-docker:latest
+    group: laravel
+    commands:
+      - phpunit --coverage-text --colors=never
+
   - name: stage
     pull: true
     image: lorisleiva/laravel-docker:latest
