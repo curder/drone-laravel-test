@@ -80,6 +80,9 @@
         @endif
 
         <div class="content">
+            <div class="title">
+                version 1
+            </div>
             <div class="title m-b-md">
                 Laravel ❤️ CI/CD Deployer..
             </div>
