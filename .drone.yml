@@ -34,10 +34,10 @@ steps:
     commands:
       - eval $(ssh-agent -s)
       - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
-      - sudo mkdir -p ~/.ssh && sudo chmod 700 ~/.ssh
+      - mkdir -p ~/.ssh && chmod 700 ~/.ssh
       - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - ssh-keyscan drone-deploy.webfsd.com >> ~/.ssh/known_hosts
-      - chmod 644 ~/.ssh/known_hosts
+      - chmod 644 ~/.ssh/known_hostchmod 644 ~/.ssh/known_hostss
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 ---
