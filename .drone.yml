@@ -25,20 +25,20 @@ steps:
       - php artisan key:generate
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
-  # - name: stage
-  #   image: lorisleiva/laravel-docker:latest
-  #   group: laravel
-  #   environment:
-  #      SSH_KEY:
-  #        from_secret: ssh_key
-  #   commands:
-  #     - eval $(ssh-agent -s)
-  #     - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
-  #     - sudo mkdir -p ~/.ssh && sudo chmod 700 ~/.ssh
-  #     - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-  #     - ssh-keyscan drone-deploy.webfsd.com >> ~/.ssh/known_hosts
-  #     - chmod 644 ~/.ssh/known_hosts
-  #     - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+  - name: stage
+    image: lorisleiva/laravel-docker:latest
+    group: laravel
+    environment:
+       SSH_KEY:
+         from_secret: ssh_key
+    commands:
+      - eval $(ssh-agent -s)
+      - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
+      - sudo mkdir -p ~/.ssh && sudo chmod 700 ~/.ssh
+      - [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+      - ssh-keyscan drone-deploy.webfsd.com >> ~/.ssh/known_hosts
+      - chmod 644 ~/.ssh/known_hosts
+      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 ---
 kind: pipeline
@@ -59,7 +59,7 @@ steps:
         from_secret: ssh_port
       script:
         - cd /var/www/codes/temp/drone-deploy.webfsd.com/current
-        - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+        # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 depends_on:
   - build
