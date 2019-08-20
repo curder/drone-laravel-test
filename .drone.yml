@@ -41,7 +41,8 @@ steps:
       - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - hostname
       - whoami
-      - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
+      - php artisan deploy:run ssh -vvv
+      # - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
 ---
 kind: pipeline
