@@ -108,6 +108,7 @@ return [
 
     'hosts' => [
         'drone-deploy.webfsd.com' => [
+            'ssh_multiplexing' => false,
             'deploy_path' => '/var/www/codes/temp/drone-deploy.webfsd.com',
             'user' => 'deployer',
             'identityFile' => '~/.ssh/deployerkey',
