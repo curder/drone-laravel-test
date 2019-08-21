@@ -85,11 +85,16 @@ volumes:
     host:
       path: /tmp/drone/stage/cache
 
+trigger:
+  branch:
+    - stage
+    - prod
+
 ---
 kind: pipeline
 name: production
 steps:
-  - name: restore-production-cache
+  - name: restore-prod-cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
@@ -123,7 +128,7 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
-  - name: rebuild-production-cache
+  - name: rebuild-prod-cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
@@ -154,11 +159,11 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /tmp/drone/production/cache
+      path: /tmp/drone/prod/cache
 
 trigger:
   branch:
-    - release
+    - prod
 # ---
 # kind: pipeline
 # name: production
