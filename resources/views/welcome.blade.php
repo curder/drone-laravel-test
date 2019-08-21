@@ -82,10 +82,10 @@
 
         <div class="content">
             <div class="title">
-                Deployer from gogs server. host:port is 172.16.11.17:3000
+                CI/CD
             </div>
             <div class="title m-b-md">
-                Drone ❤️ CI/CD Deployer..
+                Drone ❤️ Deployer..
             </div>
         </div>
     </div>
