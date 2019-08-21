@@ -84,7 +84,7 @@ steps:
     image: lddsb/drone-dingtalk-message
     settings:
       sha_link: true
-      message_pic: true
+      # message_pic: true
       message_color: true
       token:
         from_secret: dingtalk_robot_access_token
@@ -169,6 +169,20 @@ steps:
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy-prod.webfsd.com -s upload -vvv
+
+  - name: dingtalk-notify
+    image: lddsb/drone-dingtalk-message
+    settings:
+      sha_link: true
+      message_pic: true
+      message_color: true
+      token:
+        from_secret: dingtalk_robot_access_token
+      type: markdown
+    when:
+      status:
+        - failure
+        - success
 volumes:
   - name: cache
     host:

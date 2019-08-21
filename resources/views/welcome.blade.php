@@ -82,10 +82,10 @@
 
         <div class="content">
             <div class="title">
-                Deployer from gogs server. add ding-talk notify.
+                Ding Talk Notify.
             </div>
             <div class="title m-b-md">
-                Laravel ❤️ CI/CD Deployer..
+                Drone ❤️ CI/CD Deployer..
             </div>
 
             <div class="links">
