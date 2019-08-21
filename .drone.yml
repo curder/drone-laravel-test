@@ -37,13 +37,13 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
-  - name: restore-cache
+  - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
         path: /cache
     settings:
-      restore: true
+      rebuild: true
       mount:
         - ./node_modules
         - ./vendor
