@@ -84,6 +84,7 @@ volumes:
   - name: cache
     host:
       path: /tmp/drone/cache
+
 ---
 kind: pipeline
 name: production
