@@ -2,7 +2,7 @@ kind: pipeline
 name: stage
 
 steps:
-  - name: restore-cache
+  - name: restore-stage-cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
@@ -39,7 +39,7 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
-  - name: rebuild-cache
+  - name: rebuild-stage-cache
     image: drillster/drone-volume-cache
     volumes:
       - name: cache
@@ -83,12 +83,23 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /tmp/drone/cache
+      path: /tmp/drone/stage/cache
 
 ---
 kind: pipeline
 name: production
 steps:
+  - name: restore-production-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+        - ./vendor
+
   - name: npm
     image: node:10.16
     group: laravel
@@ -111,6 +122,18 @@ steps:
       - composer install --verbose --prefer-dist --no-interaction --optimize-autoloader --no-dev -vvv
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
+
+  - name: rebuild-production-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      rebuild: true
+      mount:
+        - ./node_modules
+        - ./vendor
+
   - name: prod
     image: lorisleiva/laravel-docker:latest
     group: laravel
@@ -128,6 +151,10 @@ steps:
       - chmod 700 $ssh_path/deployerkey
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy-prod.webfsd.com -s upload -vvv
+volumes:
+  - name: cache
+    host:
+      path: /tmp/drone/production/cache
 
 trigger:
   branch:
