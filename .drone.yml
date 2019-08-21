@@ -2,6 +2,17 @@ kind: pipeline
 name: stage
 
 steps:
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+        - ./vendor
+
   - name: npm
     image: node:10.16
     group: laravel
@@ -56,6 +67,10 @@ steps:
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache
 ---
 kind: pipeline
 name: production
