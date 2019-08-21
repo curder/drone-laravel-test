@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title">
-                Deployer from gogs server. V6 test for release branch.
+                Deployer from gogs server. V7 test for prod branch.
             </div>
             <div class="title m-b-md">
                 Laravel ❤️ CI/CD Deployer..
