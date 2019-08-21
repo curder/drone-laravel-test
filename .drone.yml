@@ -2,16 +2,16 @@ kind: pipeline
 name: stage
 
 steps:
-  - name: restore-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-        - ./vendor
+  # - name: restore-cache
+  #   image: drillster/drone-volume-cache
+  #   volumes:
+  #     - name: cache
+  #       path: /cache
+  #   settings:
+  #     restore: true
+  #     mount:
+  #       - ./node_modules
+  #       - ./vendor
 
   - name: npm
     image: node:10.16
@@ -39,16 +39,16 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
-  - name: rebuild-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount:
-        - ./node_modules
-        - ./vendor
+  # - name: rebuild-cache
+  #   image: drillster/drone-volume-cache
+  #   volumes:
+  #     - name: cache
+  #       path: /cache
+  #   settings:
+  #     rebuild: true
+  #     mount:
+  #       - ./node_modules
+  #       - ./vendor
 
   - name: codestyle
     image: lorisleiva/laravel-docker:latest
@@ -80,10 +80,10 @@ steps:
       - echo -e "Host *\n\tStrictHostKeyChecking no\n" > $ssh_path/config
       - php artisan deploy --hosts=drone-deploy.webfsd.com -s upload -vvv
 
-volumes:
-  - name: cache
-    host:
-      path: /tmp/drone/cache
+# volumes:
+#   - name: cache
+#     host:
+#       path: /tmp/drone/cache
 
 ---
 kind: pipeline
