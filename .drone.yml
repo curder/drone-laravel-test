@@ -81,7 +81,7 @@ trigger:
   branch:
     - release
  depends_on:
-   - default
+   - stage
 # ---
 # kind: pipeline
 # name: production
