@@ -90,7 +90,7 @@ return [
 
     'options' => [
         'application' => env('APP_NAME', 'Laravel'),
-        'repository' => 'https://github.com/curder/drone-laravel-test.git',
+        'repository' => 'http://192.168.11.20:3000/curder/drone-laravel-test.git',
         'default_timeout' => null,
         'php_fpm_service' => 'php72-php-fpm',
 
