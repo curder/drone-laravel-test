@@ -33,6 +33,7 @@ steps:
       - cp .env.example .env
       - git config --global http.sslVerify false
       - composer config repo.packagist composer https://mirrors.aliyun.com/composer/
+      - composer global require hirak/prestissimo
       - composer install --prefer-dist -vvv
       - php artisan key:generate
   #      - php artisan migrate
