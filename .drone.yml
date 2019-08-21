@@ -37,6 +37,17 @@ steps:
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
 
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+        - ./vendor
+
   - name: codestyle
     image: lorisleiva/laravel-docker:latest
     group: laravel
@@ -70,7 +81,7 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /tmp/cache
+      path: /tmp/drone/cache
 ---
 kind: pipeline
 name: production
