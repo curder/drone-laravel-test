@@ -101,7 +101,7 @@ volumes:
 trigger:
   branch:
     - stage
-    - prod
+    - master
 
 ---
 kind: pipeline
@@ -176,7 +176,7 @@ volumes:
 
 trigger:
   branch:
-    - prod
+    - master
 # ---
 # kind: pipeline
 # name: production
