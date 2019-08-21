@@ -18,8 +18,8 @@ echo drone/agent drone/drone drillster/drone-volume-cache lddsb/drone-dingtalk-m
 ```
 
 
-- 当提交到 master 分支，将构建测试版本
-- 当提交到 release 分支，将构建测试版本和上线版本
+- 当提交到 stage 分支，将构建测试版本，即在测试站点可以访问变更
+- 当提交到 master 分支，将构建测试版本和上线版本，即在测试站点和线上版本可以访问变更
 
 [![Build Status](https://cloud.drone.io/api/badges/curder/drone-laravel-test/status.svg)](https://cloud.drone.io/curder/drone-laravel-test)
 
