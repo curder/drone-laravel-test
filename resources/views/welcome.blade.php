@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title">
-                Ding Talk Notify.
+                Deployer from gogs server. host:port is 172.16.11.17:3000
             </div>
             <div class="title m-b-md">
                 Drone ❤️ CI/CD Deployer..
