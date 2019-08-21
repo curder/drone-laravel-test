@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title">
-                Deployer from gogs server. V1
+                Deployer from gogs server. V2
 
             </div>
             <div class="title m-b-md">
