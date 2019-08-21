@@ -114,7 +114,7 @@ return [
             'identityFile' => '~/.ssh/deployerkey',
             'port' => 22,
             'user' => 'deployer',
-            'branch' => 'gogs',
+            'branch' => 'stage',
             'forwardAgent' => true,
             'multiplexing' => true,
             'sshOptions'   => [
@@ -128,6 +128,7 @@ return [
             'identityFile' => '~/.ssh/deployerkey',
             'port' => 22,
             'user' => 'deployer',
+            'branch' => 'prod',
             'forwardAgent' => true,
             'multiplexing' => true,
             'sshOptions'   => [
