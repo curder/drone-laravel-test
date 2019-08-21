@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title">
-                version 6 for release
+                Deployer from gogs server. V1
             </div>
             <div class="title m-b-md">
                 Laravel ❤️ CI/CD Deployer..
