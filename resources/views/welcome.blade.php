@@ -82,7 +82,7 @@
 
         <div class="content">
             <div class="title">
-                Deployer from gogs server. V4
+                Deployer from gogs server. V5 test protected setting.
 
             </div>
             <div class="title m-b-md">
