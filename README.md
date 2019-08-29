@@ -1,6 +1,6 @@
 ## Drone laravel Demo.
 
-[![Build Status](http://172.16.11.15:10080/api/badges/test-projects/drone-laravel-test/status.svg)](http://172.16.11.15:10080/test-projects/drone-laravel-test)
+[![Build Status](https://cloud.drone.io/api/badges/curder/drone-laravel-test/status.svg)](https://cloud.drone.io/curder/drone-laravel-test)
 
 ```
 docker pull drone/drone
