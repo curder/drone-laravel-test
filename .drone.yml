@@ -2,17 +2,6 @@ kind: pipeline
 name: stage
 
 steps:
-  - name: restore-stage-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-        - ./vendor
-
   - name: npm
     image: node:10.16
     group: laravel
@@ -38,17 +27,6 @@ steps:
       - php artisan key:generate
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
-
-  - name: rebuild-stage-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount:
-        - ./node_modules
-        - ./vendor
 
   - name: codestyle
     image: lorisleiva/laravel-docker:latest
@@ -93,10 +71,6 @@ steps:
       status:
         - failure
         - success
-volumes:
-  - name: cache
-    host:
-      path: /tmp/drone/stage/cache
 
 trigger:
   branch:
@@ -107,17 +81,6 @@ trigger:
 kind: pipeline
 name: production
 steps:
-  - name: restore-prod-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-        - ./vendor
-
   - name: npm
     image: node:10.16
     group: laravel
@@ -140,17 +103,6 @@ steps:
       - composer install --verbose --prefer-dist --no-interaction --optimize-autoloader --no-dev -vvv
   #      - php artisan migrate
   #      - ./vendor/bin/phpunit
-
-  - name: rebuild-prod-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount:
-        - ./node_modules
-        - ./vendor
 
   - name: prod
     image: lorisleiva/laravel-docker:latest
@@ -183,10 +135,6 @@ steps:
       status:
         - failure
         - success
-volumes:
-  - name: cache
-    host:
-      path: /tmp/drone/prod/cache
 
 trigger:
   branch:
